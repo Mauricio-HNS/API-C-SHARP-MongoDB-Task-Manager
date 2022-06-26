@@ -43,7 +43,7 @@ namespace TaskManager.API.Controllers
         {
             var tarefa = new Tarefa(novaTarefa.Nome, novaTarefa.Detalhes);
 
-            _tarefasRepository.Adicionar(tarefa);
+            _tarefasRepository.Postar(tarefa);
 
             return Created("", tarefa);
         }
@@ -52,7 +52,7 @@ namespace TaskManager.API.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(string id, [FromBody] TarefaInputModel tarefaAtualizada)
         {
-            var tarefa = _tarefasRepository.Buscar(id);
+            var tarefa = _tarefasRepository.Atualizar(id);
 
             if (tarefa == null)
                 return NotFound();
@@ -68,7 +68,7 @@ namespace TaskManager.API.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)
         {
-            var tarefa = _tarefasRepository.Buscar(id);
+            var tarefa = _tarefasRepository.Deletar(id);
 
             if (tarefa == null)
                 return NotFound();
